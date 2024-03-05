@@ -6,6 +6,7 @@ function CreateItem() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0.00);
   const [quantity, setQuantity] = useState(0);
+  const [cartId, setCardId] = useState(0)
 
   function checkItem() {
     axios.get("http://localhost:8082/item/get").then((response) => {
@@ -38,12 +39,14 @@ function CreateItem() {
         name,
         price,
         quantity,
+        cartId,
       })
       .then((response) => {
         console.log(response);
         setName("");
         setPrice(0.00);
         setQuantity(0);
+        setCardId(0);
         alert("Item created successfully");
       })
       .catch((err) => console.error(err));
@@ -81,6 +84,14 @@ function CreateItem() {
             type="text"
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
+          />
+        </label>
+        <label>
+          Cart ID
+          <input
+            type="text"
+            value={cartId}
+            onChange={(e) => setCardId(e.target.value)}
           />
         </label>
         <button type="submit" class="btn btn-primary">Create Item</button>
